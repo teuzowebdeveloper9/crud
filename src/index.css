@@ -13,3 +13,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.left-light,
+.right-light {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #7c0dd6 0%, #7215b1 40%, transparent 100%);
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.left-light {
+  top: 70%;
+  left: -100px;
+  transform: translateY(-50%);
+}
+
+.right-light  {
+  top: 10%;
+  right: -100px;
+  transform: translateY(-50%);
+}

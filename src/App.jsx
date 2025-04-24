@@ -4,7 +4,17 @@ function App() {
 
 
   return (
-  <h1>Hello World</h1>
+  <main>
+    <div>
+    <h1>Hello World</h1>
+    </div>
+     
+    <div class="left-light"></div>
+    <div class="right-light"></div>
+    
+  
+  </main>
+   
   )
 }
 
