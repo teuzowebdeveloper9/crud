@@ -1,4 +1,9 @@
 import './App.css'
+import About from './components/about'
+import Students from './components/students'
+import Home from './components/home'
+
+
 
 function App() {
 
