@@ -15,7 +15,7 @@ function App() {
   <main>
    
     <div className='text-center'>
-    <h1>Hello World</h1>
+    <h1>list student</h1>
     </div>
     <BrowserRouter>
     <div className='navbar'>
