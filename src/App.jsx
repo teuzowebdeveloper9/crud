@@ -6,20 +6,26 @@ import {BrowserRouter,Routes,Link,Route} from 'react-router-dom'
 
 
 
+
 function App() {
 
 
   return (
+
   <main>
+   
     <div className='text-center'>
     <h1>Hello World</h1>
     </div>
     <BrowserRouter>
+    <div className='navbar'>
     <ul className='list'>
-      <li><Link to={'/'}> home page</Link> </li>
-      <li><Link  to={'/sobre'}> about </Link></li>
-      <li><Link to={'/students'}>students</Link></li>
+      <li className='ancora'><Link to={'/'}> home page</Link> </li>
+      <li className='ancora'><Link  to={'/sobre'}> about </Link></li>
+      <li className='ancora'><Link to={'/students'}>students</Link></li>
     </ul>
+    </div>
+   
      <Routes>
       <Route path='/' element={<Home></Home>}></Route>
       <Route path='/sobre' element={<About></About>}></Route>
