@@ -35,3 +35,9 @@
   right: -100px;
   transform: translateY(-50%);
 }
+.list{
+  display: inline;
+}
+.text-center{
+  text-align: center;
+}
