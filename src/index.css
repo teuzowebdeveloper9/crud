@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
-  background-color: #242424 !important;
+  background:linear-gradient(50deg, black,rgb(85, 41, 85)) !important;
 }
 
 :root {
@@ -54,9 +54,11 @@ body {
   padding: 0;
 }
 
-.text-center {
+.text-center  h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
   text-align: center;
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: black !important;
 }
 
 .navbar {
@@ -83,10 +85,10 @@ body {
   font-weight: bold;
   font-style: normal;
   text-decoration: none;
-  color: rgb(235, 231, 231);
+  color: rgb(0, 0, 0);
 }
 
-/* Estilos específicos para a tabela do Bootstrap */
+
 .table {
   background-color: #1a1a1a !important;
   color: rgb(235, 231, 231) !important;

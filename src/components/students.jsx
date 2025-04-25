@@ -3,8 +3,23 @@ import { Table } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Students extends React.Component{
-  render(){
-    return(
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      students: [
+        {'id':1,'name': 'joey', 'e-mail':'joey@student.com' },
+        {'id':2, 'name': 'jack', 'e-mail': 'jack@student.com'},
+        {'id':3, 'name': 'willyan', 'e-mail': 'willyan@student.com'},
+        {'id':4, 'name': 'james', 'e-mail': 'james@student.com'}
+      ]
+    };
+  }
+
+  render() {
+    return (
+
+
       <Table striped bordered hover variant="dark" className="mt-4">
         <thead>
           <tr>
