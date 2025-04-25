@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
-  background:linear-gradient(20deg, black,rgb(85, 41, 85)) !important;
+  background:linear-gradient(60deg,rgb(92, 12, 61),rgb(158, 19, 19)) !important;
 }
 
 :root {
@@ -58,7 +58,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   text-align: center;
-  color: black !important;
+  color: rgb(191, 12, 236)!important;
 }
 
 .navbar {
@@ -85,7 +85,7 @@ body {
   font-weight: bold;
   font-style: normal;
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  color: rgb(191, 12, 236);
 }
 
 

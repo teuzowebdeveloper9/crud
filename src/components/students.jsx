@@ -30,6 +30,23 @@ class Students extends React.Component{
     }));
   }
 
+  handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/students/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        // Remove o estudante do estado
+        this.setState(prevState => ({
+          students: prevState.students.filter(student => student.id !== id)
+        }));
+      }
+    } catch (error) {
+      console.error('Error deleting student:', error);
+    }
+  }
+
   handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email } = this.state.newStudent;
@@ -56,14 +73,6 @@ class Students extends React.Component{
     } catch (error) {
       console.error('Error adding student:', error);
     }
-  }
-
-  componentDidMount(){
-
-  }
-
-  componentWillUnmount(){
-     
   }
 
   render() {
@@ -115,7 +124,12 @@ class Students extends React.Component{
                 <td>{student.name}</td>
                 <td>{student['e-mail']}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm me-2">Delete</button>
+                  <button 
+                    className="btn btn-danger btn-sm me-2"
+                    onClick={() => this.handleDelete(student.id)}
+                  >
+                    Delete
+                  </button>
                   <button className="btn btn-primary btn-sm">Refresh</button>
                 </td>
               </tr>
