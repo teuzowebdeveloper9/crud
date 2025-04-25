@@ -36,6 +36,26 @@ E sim… tem até uma **historinha na Home**. Totalmente inventada por mim (del�
 - ✨ Interface estilizada e contextualizada pra não ser mais um CRUD sem alma
 
 ---
+##SCREENSHOTS 
+
+![image](https://github.com/user-attachments/assets/f55a50e9-5e41-436f-b223-ca22a648ca18)
+
+![image](https://github.com/user-attachments/assets/79f7edd4-cbd7-4db0-855b-51c3e4afe1cf)
+
+![image](https://github.com/user-attachments/assets/5ff884b3-9da0-4205-89e5-0dede6b1aecf)
+
+![image](https://github.com/user-attachments/assets/80c66dfa-30eb-482c-81b6-1321755bbf5d)
+
+
+![image](https://github.com/user-attachments/assets/a28d9b7b-cfa5-46ae-a0e7-98b3f7338871)
+
+![image](https://github.com/user-attachments/assets/ab3bca1d-3d95-4b74-81c0-9491d1f86bc4)
+
+![image](https://github.com/user-attachments/assets/026fb5a9-e22c-4c01-9616-05388d205632)
+
+
+
+---
 
 ## 💌 Feedback
 
