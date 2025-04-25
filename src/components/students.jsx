@@ -2,22 +2,37 @@ import React from "react"
 import { Table } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Students extends React.Component{
+const API_URL = 'http://localhost:3001/api';
+
+class Students extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      students: [
-        {'id':1,'name': 'joey', 'e-mail':'joey@student.com' },
-        {'id':2, 'name': 'jack', 'e-mail': 'jack@student.com'},
-        {'id':3, 'name': 'willyan', 'e-mail': 'willyan@student.com'},
-        {'id':4, 'name': 'james', 'e-mail': 'james@student.com'}
-      ],
+      students: [],
       newStudent: {
         name: '',
         email: ''
-      }
+      },
+      error: null
     };
+  }
+
+  componentDidMount() {
+    this.loadStudents();
+  }
+
+  loadStudents = async () => {
+    try {
+      const response = await fetch(`${API_URL}/students`);
+      if (!response.ok) {
+        throw new Error('Failed to load students');
+      }
+      const students = await response.json();
+      this.setState({ students });
+    } catch (error) {
+      console.error('Error loading students:', error);
+    }
   }
 
   handleInputChange = (e) => {
@@ -32,16 +47,18 @@ class Students extends React.Component{
 
   handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/students/${id}`, {
-        method: 'DELETE'
+      await fetch(`${API_URL}/students/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
       });
 
-      if (response.ok) {
-        // Remove o estudante do estado
-        this.setState(prevState => ({
-          students: prevState.students.filter(student => student.id !== id)
-        }));
-      }
+      this.setState(prevState => ({
+        students: prevState.students.filter(student => student.id !== id)
+      }));
+
     } catch (error) {
       console.error('Error deleting student:', error);
     }
@@ -52,10 +69,11 @@ class Students extends React.Component{
     const { name, email } = this.state.newStudent;
     
     try {
-      const response = await fetch('http://localhost:3001/api/students', {
+      const response = await fetch(`${API_URL}/students`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           name,
@@ -63,23 +81,33 @@ class Students extends React.Component{
         })
       });
 
-      if (response.ok) {
-        const newStudent = await response.json();
-        this.setState(prevState => ({
-          students: [...prevState.students, newStudent],
-          newStudent: { name: '', email: '' }
-        }));
+      if (!response.ok) {
+        throw new Error('Failed to add student');
       }
+
+      const newStudent = await response.json();
+      this.setState(prevState => ({
+        students: [...prevState.students, newStudent],
+        newStudent: { name: '', email: '' },
+        error: null
+      }));
     } catch (error) {
       console.error('Error adding student:', error);
+      this.setState({ error: 'Failed to add student. Is the server running?' });
     }
   }
 
   render() {
-    const { students, newStudent } = this.state;
+    const { students, newStudent, error } = this.state;
     
     return (
       <div>
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+        
         <form onSubmit={this.handleSubmit} className="student-form">
           <div className="form-row">
             <div className="form-group">
@@ -126,7 +154,11 @@ class Students extends React.Component{
                 <td>
                   <button 
                     className="btn btn-danger btn-sm me-2"
-                    onClick={() => this.handleDelete(student.id)}
+                    onClick={() => {
+                      if (window.confirm('Tem certeza que deseja deletar este estudante?')) {
+                        this.handleDelete(student.id);
+                      }
+                    }}
                   >
                     Delete
                   </button>
