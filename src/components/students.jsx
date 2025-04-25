@@ -12,63 +12,117 @@ class Students extends React.Component{
         {'id':2, 'name': 'jack', 'e-mail': 'jack@student.com'},
         {'id':3, 'name': 'willyan', 'e-mail': 'willyan@student.com'},
         {'id':4, 'name': 'james', 'e-mail': 'james@student.com'}
-      ]
+      ],
+      newStudent: {
+        name: '',
+        email: ''
+      }
     };
   }
 
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      newStudent: {
+        ...prevState.newStudent,
+        [name]: value
+      }
+    }));
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email } = this.state.newStudent;
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/students', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          'e-mail': email
+        })
+      });
+
+      if (response.ok) {
+        const newStudent = await response.json();
+        this.setState(prevState => ({
+          students: [...prevState.students, newStudent],
+          newStudent: { name: '', email: '' }
+        }));
+      }
+    } catch (error) {
+      console.error('Error adding student:', error);
+    }
+  }
+
+  componentDidMount(){
+
+  }
+
+  componentWillUnmount(){
+     
+  }
+
   render() {
+    const { students, newStudent } = this.state;
+    
     return (
+      <div>
+        <form onSubmit={this.handleSubmit} className="student-form">
+          <div className="form-row">
+            <div className="form-group">
+              <input
+                type="text"
+                name="name"
+                value={newStudent.name}
+                onChange={this.handleInputChange}
+                placeholder="Name of student"
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                value={newStudent.email}
+                onChange={this.handleInputChange}
+                placeholder="E-mail of student"
+                className="form-control"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-success">
+              Add Student
+            </button>
+          </div>
+        </form>
 
-
-      <Table striped bordered hover variant="dark" className="mt-4">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>options</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Joey</td>
-            <td>joey@student.com</td>
-            <td>
-              <button className="btn btn-danger btn-sm me-2">Delete</button>
-              <button className="btn btn-primary btn-sm">Refresh</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>jack</td>
-            <td>jack@student.com</td>
-            <td>
-              <button className="btn btn-danger btn-sm me-2">Delete</button>
-              <button className="btn btn-primary btn-sm">Refresh</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>willyan</td>
-            <td>willyan@student.com</td>
-            <td>
-              <button className="btn btn-danger btn-sm me-2">Delete</button>
-              <button className="btn btn-primary btn-sm">Refresh</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>james</td>
-            <td>james@student.com</td>
-            <td>
-              <button className="btn btn-danger btn-sm me-2">Delete</button>
-              <button className="btn btn-primary btn-sm">Refresh</button>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+        <Table striped bordered hover variant="dark" className="mt-4">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>E-mail</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map(student => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student['e-mail']}</td>
+                <td>
+                  <button className="btn btn-danger btn-sm me-2">Delete</button>
+                  <button className="btn btn-primary btn-sm">Refresh</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     )
   }
 }
