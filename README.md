@@ -16,6 +16,13 @@ E sim… tem até uma **historinha na Home**. Totalmente inventada por mim (del�
 - **Students** – Aqui o CRUD acontece! Cadastre novos alunos com seus e-mails estudantis e remova qualquer erro com um clique.
 
 ---
+## 🚀 Deploy
+
+O projeto está disponível online graças ao poder da **Vercel**!  
+Você pode acessá-lo aqui: [crud-ueed.vercel.app](https://crud-ueed.vercel.app/) 🔗  
+Fique à vontade para explorar, testar, e claro… tentar bugar (brincadeira, nem tenta kkk).
+
+---
 
 ## ⚙️ Tecnologias Utilizadas
 
